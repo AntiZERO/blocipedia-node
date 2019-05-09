@@ -6,8 +6,11 @@ const expressValidator = require("express-validator");
 const session = require("express-session");
 const flash = require("express-flash");
 const passportConfig = require("./passport-config");
+const logger = require('morgan');
 
 module.exports = {
+
+  
 
   init(app, express){
     app.set("views", viewsFolder);
@@ -20,6 +23,9 @@ module.exports = {
       saveUninitialized: false,
       cookie: { maxAge: 1.21e+9 } //set cookie to expire in 14 days
     }));
+
+    app.use(logger('dev'));
+    
     app.use(flash());
 
     app.use((req, res, next) => {
