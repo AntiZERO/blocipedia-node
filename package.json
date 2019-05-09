@@ -1,0 +1,41 @@
+{
+  "name": "blocipedia-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "set NODE_ENV=test&& jasmine",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntiZERO/blocipedia-node.git"
+  },
+  "author": "Gordon Ray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntiZERO/blocipedia-node/issues"
+  },
+  "homepage": "https://github.com/AntiZERO/blocipedia-node#readme",
+  "devDependencies": {
+    "jasmine": "^3.4.0",
+    "request": "^2.88.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-flash": "0.0.2",
+    "express-session": "^1.16.1",
+    "express-validator": "^5.3.1",
+    "faker": "^4.1.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.10.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^5.8.5",
+    "sequelize-cli": "^5.4.0"
+  }
+}
