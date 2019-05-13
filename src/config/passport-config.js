@@ -30,6 +30,7 @@ module.exports = {
     });
 
     passport.deserializeUser((id, callback) => {
+      console.log(id + " poop");
       User.findById(id)
       .then((user) => {
         callback(null, user);
