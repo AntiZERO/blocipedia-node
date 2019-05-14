@@ -103,7 +103,7 @@ describe("User", () => {
           done();
         })
         .catch((err) => {
-          expect(err.message).toContain("Validation error");
+          expect(err.message).toContain("An account with that email already exists");
           done();
         })
         .catch((err) => {
