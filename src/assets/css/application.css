@@ -8,6 +8,7 @@ body {
   border-bottom-style: solid;
   border-color: #e8e8e8;
   border-width: 1px;
+  z-index: 0;
 }
 
 .navbar-brand {
@@ -41,6 +42,7 @@ body {
   background: rgba(85, 136, 163, 0.5);
   font-weight: bold;
   font-family: verdana;
+  z-index: 1;
 }
 
 .row {
@@ -50,3 +52,6 @@ body {
   background: none;
 }
 
+.messageContainer {
+  z-index: 2;
+}

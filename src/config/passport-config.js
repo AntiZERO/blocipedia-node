@@ -31,7 +31,7 @@ module.exports = {
 
     passport.deserializeUser((id, callback) => {
       console.log(id + " poop");
-      User.findById(id)
+      User.findByPk(id)
       .then((user) => {
         callback(null, user);
       })
