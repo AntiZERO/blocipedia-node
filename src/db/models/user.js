@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     role: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 0       // 0 (Free) / 1 (Premium)
+      defaultValue: 0       // 0 (Free) / 1 (Premium) / 2 (Admin)
     },
     email: {
       type: DataTypes.STRING,
