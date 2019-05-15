@@ -15,3 +15,5 @@ router.post("/wikis/:id/destroy", wikiController.destroy);
 router.post("/wikis/:id/update", validation.validateWikis, wikiController.update);
 
 module.exports = router;
+
+// reminder for policies: public wikis editable by all, private editable by owner/collaborators

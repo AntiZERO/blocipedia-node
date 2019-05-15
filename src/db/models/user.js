@@ -5,6 +5,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 0
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
