@@ -23,7 +23,7 @@ module.exports = {
         res.redirect("/users/signup");
       } else {
         //send email
-        sgMail.setApiKey('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');
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
           to: req.body.email,
           from: 'gray2884@gmail.com',

@@ -1,5 +1,6 @@
 const app = require("./app");
 const http = require("http");
+require('dotenv').config();
 
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
