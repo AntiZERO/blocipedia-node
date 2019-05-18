@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <% include ../static/partials/messages.ejs %>
+
+      <h1>Hi <%= currentUser.username %>!</h1>
+
+      <% if (currentUser.role == 0 || currentUser.role == null) { %>
+        <p>You have a <strong>Standard Account</strong>. Want to Upgrade?</p>
+        <a href="/users/<%= currentUser.id %>/upgradeForm" class="btn btn-primary btn-lg">Go Premium</a>
+      <% } if (currentUser.role == 1) { %>
+        <p>You have a <strong>Premium Account</strong>. Want to go back to standard?</p>
+        <a href="/users/<%= currentUser.id %>/downgradeForm" class="btn btn-primary btn-lg">Go Standard</a>
+      <% } if (currentUser.role == 2) { %>
+        <p>You are an <strong>Administrator</strong>.</p>
+      <% } %>
+    </main>
+    <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>

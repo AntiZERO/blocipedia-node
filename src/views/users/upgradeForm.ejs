@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../static/partials/head.ejs %>
+</head>
+
+<body>
+  <% include ../static/partials/navbar.ejs %>
+
+  <main class="container">
+    <% include ../static/partials/messages.ejs %>
+
+    <h1>Account upgrade for: <%= currentUser.username %></h1>
+
+    <% if(currentUser){ %>
+    <form action="/users/<%= currentUser.id %>/upgrade" method="POST">
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_rImgFrXIVGZp7sM2mjtfQz3X008jBNifyb" data-amount="1500" data-name="Blocpedia"
+        data-description="Upgrade to premium" data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto">
+        </script>
+    </form>
+    <% } %>
+  </main>
+
+  <% include ../static/partials/baseScripts.ejs %>
+</body>
+
+</html>

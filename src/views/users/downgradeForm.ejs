@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../static/partials/head.ejs %>
+</head>
+
+<body>
+  <% include ../static/partials/navbar.ejs %>
+
+  <main class="container">
+    <% include ../static/partials/messages.ejs %>
+
+    <h1>Account downgrade for: <%= currentUser.username %></h1>
+    <p><em>Note: Your Private Wikis will be made Public</em></p>
+
+    <% if(currentUser){ %>
+
+    <form action="/users/<%= currentUser.id %>/downgrade" method="POST">
+      <button type="Submit" class="btn btn-warning">Confirm Downgrade</button>
+    </form>
+
+    <% } %>
+  </main>
+
+  <% include ../static/partials/baseScripts.ejs %>
+</body>
+
+</html>
