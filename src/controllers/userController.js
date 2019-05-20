@@ -1,4 +1,5 @@
 const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
@@ -118,7 +119,7 @@ module.exports = {
       if (user) {
         let action = "downgrade"
         userQueries.toggleRole(user, action);
-        //wikiQueries.makePublic(user);
+        wikiQueries.downgrade(req.params.id);
         req.flash("notice", "Your account has been downgraded to Standard.");
         res.redirect("/");
       } else {

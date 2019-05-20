@@ -1,6 +1,7 @@
 const wikiQueries = require("../db/queries.wikis.js");
 
 module.exports = {
+
   index(req, res, next) {
     wikiQueries.getAllWikis((err, wikis) => {
       if (err) {
@@ -16,6 +17,10 @@ module.exports = {
     res.render("wikis/new");
   },
 
+  newPrivate(req, res, next) {
+    res.render("wikis/newPrivate");
+  },
+
   create(req, res, next) {
     let newWiki = {
       title: req.body.title,
@@ -25,6 +30,23 @@ module.exports = {
     wikiQueries.addWiki(newWiki, (err, wiki) => {
       if (err) {
         res.redirect(500, "/wikis/new");
+      } else {
+        res.redirect(303, `/wikis/${wiki.id}`);
+      }
+    });
+  },
+
+  createPrivate(req, res, next) {
+
+    const newWiki = {
+      title: req.body.title,
+      body: req.body.body,
+      private: true,
+      userId: req.user.id
+    };
+    wikiQueries.addWiki(newWiki, (err, wiki) => {
+      if (err) {
+        res.redirect(500, "wikis/newPrivate");
       } else {
         res.redirect(303, `/wikis/${wiki.id}`);
       }
@@ -67,6 +89,26 @@ module.exports = {
         res.redirect(401, `/wikis/${req.params.id}/edit`);
       } else {
         res.redirect(`/wikis/${req.params.id}`);
+      }
+    });
+  },
+
+  makePublic(req, res, next) {
+    wikiQueries.toPublic(req.params.id, (err, wiki) => {
+      if (err || !wiki) {
+        res.redirect(404, `/wikis/${req.params.id}`)
+      } else {
+        res.redirect(`/wikis/${req.params.id}`)
+      }
+    });
+  },
+
+  makePrivate(req, res, next) {
+    wikiQueries.toPrivate(req.params.id, (err, wiki) => {
+      if (err || !wiki) {
+        res.redirect(404, `/wikis/${req.params.id}`)
+      } else {
+        res.redirect(`/wikis/${req.params.id}`)
       }
     });
   }
