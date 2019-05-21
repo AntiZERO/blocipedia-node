@@ -1,0 +1,57 @@
+<!-- show list of collaborators with form, post to collaborators/add, input text field for collaborator username, add/submit button -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../static/partials/head.ejs %>
+</head>
+
+<body>
+  <% include ../static/partials/navbar.ejs %>
+
+  <main class="container">
+    <% include ../static/partials/messages.ejs %>
+    <a href="/wikis/<%= wiki.id %>" class="btn btn-primary">Back</a>
+    <h1>Collaborators for "<%= wiki.title %>"</h1>
+    <p class="text-muted">
+      Creator User ID <%= wiki.userId %>, <br />Last updated <%=
+        wiki.updatedAt %>
+    </p>
+
+    <h3>Add a Collaborator</h3>
+    <% if(currentUser && (currentUser.id === wiki.userId || currentUser.role
+      === 2)) { %>
+    <form style="width:25%" action="/wikis/<%= wiki.id %>/collaborators/add" method="post">
+      <div class="input-group">
+        <input type="text" class="form-control" name="collaborator" placeholder="Enter username" />
+        <button type="submit" class="btn btn-secondary">Add</button>
+      </div>
+    </form>
+    <% } %>
+
+    <hr />
+
+    <% if(collaborators) { %>
+    <h3>Collaborators</h3>
+    <ul class="list-group">
+      <% collaborators.forEach((collaborator) => { %>
+      <li class="list-group-item">
+        <h4>
+          <%= collaborator.userId %>
+        </h4>
+        <form style="display:initial"
+          action="/wikis/<%= collaborator.wikiId %>/collaborators/<%= collaborator.id %>/destroy" method="post">
+          <button type="submit" class="btn btn-danger">DELETE</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No Collaborators yet for this wiki</p>
+    <% } %>
+  </main>
+
+  <% include ../static/partials/baseScripts.ejs %>
+</body>
+
+</html>

@@ -1,9 +1,12 @@
 const User = require("./models").User;
 const Wiki = require("./models").Wiki;
+const Collaborator = require("./models").Collaborator;
 
 module.exports = {
   getAllWikis(callback) {
-    return Wiki.findAll()
+    return Wiki.findAll({
+      order: [["title", "ASC"]]
+    })
       .then((wikis) => {
         callback(null, wikis);
       })
@@ -23,13 +26,18 @@ module.exports = {
   },
 
   getWiki(id, callback) {
-    return Wiki.findByPk(id)
+    return Wiki.findOne(
+      {
+        where: { id: id }
+      },
+      { include: [{model: Collaborator, as: "collaborators"}] }
+    )
       .then((wiki) => {
         callback(null, wiki);
       })
       .catch((err) => {
         callback(err);
-      })
+      });
   },
 
   deleteWiki(req, callback) {
@@ -81,7 +89,7 @@ module.exports = {
     })
     .catch(err => {
       callback(err);
-    })
+    });
   },
 
   toPrivate(id, callback){

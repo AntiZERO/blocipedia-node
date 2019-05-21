@@ -10,30 +10,34 @@
   <main class="container">
     <% include ../static/partials/messages.ejs %>
     <a href="/wikis" class="btn btn-primary">Back to All</a>
+    <hr />
     <h1><%= wiki.title %></h1>
-    <p class="text-muted">User ID <%= wiki.userId %>,
-      <% if(wiki.private == false) { %>
-      public wiki
-      public wiki (Everyone can view)
-      <% } else { %>
-      private wiki
-      private wiki (Only you can view)
-      <% } %>
-      <br />Last updated <%= wiki.updatedAt %></p>
-    <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
-    <% if((currentUser && currentUser.role == 1) || (currentUser && currentUser.role == 2)) { 
-            if(wiki.private == true) { %>
-    <p>Want to make this Wiki public?</p>
+    <% if(currentUser && currentUser.id == wiki.userId && wiki.private ==
+      true) { %>
+    <a href="/wikis/<%= wiki.id %>/collaborators" class="btn btn-info">Collaborators</a>
+    <% } %> <% if((currentUser && currentUser.role == 1) || (currentUser &&
+      currentUser.role == 2)) { if(wiki.private == true) { %>
     <form style="display:initial" action="/wikis/<%= wiki.id %>/makePublic" method="post">
       <button type="submit" class="btn btn-info">Make Public</button>
     </form>
     <% } else if(wiki.private == false) { %>
-    <p>Want to make this Wiki private?</p>
     <form style="display:initial" action="/wikis/<%= wiki.id %>/makePrivate" method="post">
       <button type="submit" class="btn btn-info">Make Private</button>
     </form>
     <% } } %>
-    <p><%- wiki.body %></p>
+    <p class="text-muted">
+      User ID <%= wiki.userId %>, <% if(wiki.private == false) { %> 
+        public wiki (Everyone can view) 
+      <% } else { %> 
+        private wiki (Only you can view)
+      <% } %> 
+      <br />
+      Last updated <%= wiki.updatedAt %>
+    </p>
+    <div class="jumbotron">
+      <p><%- wiki.body %></p>
+    </div>
+    <a href="/wikis/<%=wiki.id %>/edit" class="btn btn-warning">Edit</a>
     <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
       <button type="submit" class="btn btn-danger">Delete</button>
     </form>
